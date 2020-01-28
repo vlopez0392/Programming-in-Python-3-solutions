@@ -28,7 +28,7 @@ class Dog(): ##CamelCased! First letter is Capitalized!
 
         ###Defining other attributes (Notice the attribute types may vary - MUST BE DOCUMENTED!)
         self.name = name
-        self.spots = spots ##Type control can be enforced with other
+        self.spots = spots ##Type control can be enforced by other means (Later)
 
 #### Lets instantiate the Dog class given a breed parameter
 myDog = Dog(breed = 'Lab', name = 'Sammy', spots = False)
