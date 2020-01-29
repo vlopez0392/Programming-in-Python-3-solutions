@@ -1,5 +1,6 @@
-### OOP (PArt I)
+### OOP (Part I)
 ### Using OOP to create our own objects
+
 ### THe built-in data types are objects in Python, e.g.
 mylist = [1,2,3]
 
