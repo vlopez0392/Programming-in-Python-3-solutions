@@ -24,6 +24,7 @@ class Dog():
             + " WOOF!" + " I am dog number " + str(dogNumber) ## No need to call self. This parameter is provided by the
                                                               ## method call.
 print('=='*50, '\n')
+
 ### Testing the class object attribute given to Dogs:
 myDog = Dog(breed = 'Lab', name = 'Vick', spots = False)
 myOtherDog = Dog(breed = 'Dalmatian', name = 'Bebi', spots = True)
@@ -38,7 +39,7 @@ print(myOtherDog.bark(2), '\n')
 
 print('=='*50, '\n')
 
-### EXAMPLE II
+########### EXAMPLE II
 
 class Circle():
     ##Class object attributes
