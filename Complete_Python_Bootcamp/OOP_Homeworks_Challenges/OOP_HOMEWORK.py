@@ -41,7 +41,7 @@ class Cylinder:
     def surface_area(self):
         return 2*(math.pi*(self.radius**2)+math.pi*self.radius*self.height)
 
-### Consider the deafult parameters:
+### Consider the default parameters:
 cylinder = Cylinder()
 
 print("Cylinder 1: " + "Radius: " + str(cylinder.radius) + " Height: " + str(cylinder.height))

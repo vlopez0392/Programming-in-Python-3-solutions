@@ -121,7 +121,7 @@ fred = Animal("fred")
 ##Instead, we must inherit from Animal:
 
 class Parrot(Animal):
-    
+
     def speak(self):
         return "I'm a parrot and my name is " + self.name
 
