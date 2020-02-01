@@ -1,4 +1,4 @@
-# CHALLENGE PROBLEM:
+# OOP CHALLENGE PROBLEM:
 
 # For this challenge, create a bank account class that has two attributes:
 # • Owner
@@ -47,3 +47,7 @@ print(myAccount.withdraw(195))
 ### Trying to overdraw
 print(myAccount.withdraw(300))
 print(myAccount)
+
+### Deposit and withdraw invalid amounts
+print(myAccount.deposit(0))
+print(myAccount.withdraw(-100))

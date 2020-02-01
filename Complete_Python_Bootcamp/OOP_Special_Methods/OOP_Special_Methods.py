@@ -38,8 +38,9 @@ class Book():
         return self.pages
 
     #c
-    def __del__(self): ##Deletes the object references to the object (Not the object itself). The object is set for
-                       ##garbage collection
+    def __del__(self): ##Decreases the object references to the object by 1 (Not the object itself !!!). The object is
+                       ##then set for garbage collection if and only if the object has no references. However, this is
+                       ##not guaranteed to happen (i.e. Non-determnistic).
         print("A book reference has been deleted") ##We may add additional functionality
 
 b = Book("Python Rocks", "Vick", 200)
