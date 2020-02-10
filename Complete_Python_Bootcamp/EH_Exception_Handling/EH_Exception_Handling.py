@@ -56,7 +56,7 @@ def ask_for_int():
     while True:
         try:
             result = int(input("Please provide a number: "))
-        except:
+        except ValueError:
             print("That is not a number")
             continue
         else:
