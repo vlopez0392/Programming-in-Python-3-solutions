@@ -58,7 +58,6 @@ class Player():
 
     ### Decision function for ACE value while having a soft hand(Asks for user input)
     ### Hard hands make the ACE value automatically a 1.
-
     def choose_ace_value(self):
         choosingValue = True
         while choosingValue:
@@ -76,12 +75,42 @@ class Player():
             except ValueError:
                 print("Invalid option! Please try again!")
 
-player = Player(100,"Vick")
+    def printPlayerDeal(self,player_deal):
+        print("Dealing cards!")
+        print("Player goes first...  ")
+        print("Player Cards: ")
+        print(player_deal)
+        print("Score: " + str(self.initialDealingScore(player_deal)) + "\n")
 
+    def hitOrStay(self):
+        deciding = True
+        hitOrStay = ('hit', 'stay')
 
-deck = DeckOfCards.Deck()
-deck.shuffleDeck()
-someCards = deck.dealCards(initial_deal=True)
-print(someCards)
+        decision = ''
+        while deciding:
+            decision = input("Hit or Stay ? ")
+            decision = decision.lower()
+            if decision not in hitOrStay:
+                print("I didn't get that... Speak more clearly !")
+                continue
+            deciding = False
 
-print(player.initialDealingScore(someCards))
+        if decision == 'hit':
+            return True
+
+        return False
+
+# player = Player(100,"Vick")
+# deck = DeckOfCards.Deck()
+# deck.shuffleDeck()
+# someCards = deck.dealCards(initial_deal=True)
+# print(someCards)
+# anotherCard = deck.dealCards(hit = True)
+# print(anotherCard)
+#
+# print(player.initialDealingScore(someCards))
+# print(player.hit(anotherCard))
+# print(len(deck.deck))
+#
+# print(someCards in deck.deck)
+# print(anotherCard in deck.deck)
