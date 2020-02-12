@@ -75,12 +75,16 @@ class Player():
             except ValueError:
                 print("Invalid option! Please try again!")
 
-    def printPlayerDeal(self,player_deal):
+    def printInitialDeal(self, player_deal):
         print("Dealing cards!")
         print("Player goes first...  ")
         print("Player Cards: ")
         print(player_deal)
-        print("Score: " + str(self.initialDealingScore(player_deal)) + "\n")
+        print("Score: " + str(self.score) + "\n")
+
+    def printPlayerHand(self, hand):
+        print(hand)
+        print("Score: " + str(self.score) + "\n")
 
     def hitOrStay(self):
         deciding = True

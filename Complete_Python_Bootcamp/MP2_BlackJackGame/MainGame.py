@@ -36,9 +36,14 @@ while game_on:
     print("Deck shuffled !" + "\n")
 
     ###Initial deal
-    player_initial_deal   = deck.dealCards(initial_deal= True)
+    player_initial_deal = deck.dealCards(initial_deal= True)
     computer_initial_deal = deck.dealCards(initial_deal=True)
-    player.printPlayerDeal(player_initial_deal)
+
+    #Compute score
+    player.initialDealingScore(player_initial_deal)
+
+    #Print to the console
+    player.printInitialDeal(player_initial_deal)
     printComputerDeal(computer_initial_deal)
 
     ###Players turn
@@ -46,13 +51,18 @@ while game_on:
     player_turn = True
     current_player_hand = player_initial_deal
 
-    while player_turn:
+    while player_turn:  ###Need to add busting logic !
         hit = player.hitOrStay()
-        if hit:
-            card = deck.dealCards(hit = hit)
-            current_player_hand.append(card)
 
-        player_turn = False
+        if hit:
+            print("Hit! Card received...")
+            card = deck.dealCards(hit = hit)
+            player.hit(card)
+            current_player_hand.append(card)
+            player.printPlayerHand(current_player_hand)
+        else:
+            player.printPlayerHand(current_player_hand)
+            player_turn = False
 
     ###Dealer's Turn
     computer_turn = True
