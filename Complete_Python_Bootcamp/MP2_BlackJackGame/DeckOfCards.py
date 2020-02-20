@@ -1,12 +1,12 @@
 ########################## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ############################################
 ##### Model of a Standard Deck of Cards
-
 import random
-class Deck():
+
+class Deck:
     ### Class object attributes
     suits = ('HEARTS', 'CLUBS', 'DIAMONDS', 'SPADES')
-    deckDic = {"ONE": 1 , "TWO": 2, "THREE": 3, "FOUR": 4, "FIVE": 5, "SIX": 6, "SEVEN": 7, "EIGHT": 8, "NINE": 9,
-                  "JACK": 10, "QUEEN": 10, "KING": 10, "ACE":(1,11)}
+    deckDic = {"ONE": 1, "TWO": 2, "THREE": 3, "FOUR": 4, "FIVE": 5, "SIX": 6, "SEVEN": 7, "EIGHT": 8, "NINE": 9,
+               "JACK": 10, "QUEEN": 10, "KING": 10, "ACE": (1, 11)}
 
     ### Object constructor
     def __init__(self):
@@ -21,16 +21,16 @@ class Deck():
         self.deck = random.sample(self.deck, len(self.deck))
 
     def dealCards(self, initial_deal=False, hit=False):  # Deals cards as required by player and computer dealer at the
-        if initial_deal:                                 # beginning of the game
-            cards = random.choices(self.deck,k=2)
+        if initial_deal:  # beginning of the game
+            cards = random.choices(self.deck, k=2)
         elif hit:
             cards = [random.choice(self.deck)]
 
-        Deck.discardCards(self,cards)
+        Deck.discardCards(self, cards)
         return cards
 
-    def discardCards(self,cards): ### Discards the card (or cards) whenever an initial dealing or a hit occur.
-        if len(cards)>=2:
+    def discardCards(self, cards):  ### Discards the card (or cards) whenever an initial dealing or a hit occur.
+        if len(cards) >= 2:
             for card in cards:
                 self.deck.remove(card)
         else:

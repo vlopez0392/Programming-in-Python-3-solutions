@@ -1,6 +1,5 @@
 ############## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ########################################################
-##### Player-logic
-
+##### Model of a BJ Player and player-logic
 import DeckOfCards
 
 class Player():
@@ -12,24 +11,30 @@ class Player():
     ### Placing a valid bet
     def placeBet(self):
         placingBet = True
+        betAmount = -1
         while placingBet:
             try:
                 betAmount = int(input("Please enter the amount to bet: "))
                 waitingValidBet = True
 
                 while waitingValidBet:
-                    if betAmount <= self.bankRoll:
+                    if betAmount <= self.bankRoll and betAmount !=0:
                         print("A bet has been placed by " + str(self.playerName) + " -- Amount in $: " + str(betAmount))
                         waitingValidBet = False
-                        return betAmount
                     else:
-                        print("Your bankRoll is insufficient! Please place a valid bet. " + "Your bankroll: "
+                        if betAmount == 0:
+                            print("You can't bet $0! ")
+                            break
+                        print("Your bankroll is insufficient! Please place a valid bet. " + "Your bankroll: "
                               + str(self.bankRoll))
                         betAmount = int(input("Please enter the amount to bet: "))
+                placingBet = False
             except ValueError:
                 print("That is an invalid bet! Please input an amount in $!")
 
-    ###Displays the player info
+        return betAmount
+
+    ### Displays the player info
     def displayPlayerInfo(self):
         print("PLAYER INFO: ")
         print("|-"*15 + "|")
@@ -46,7 +51,7 @@ class Player():
                 self.score = self.score + deckDic[card[1]]
         return self.score
 
-    ###Computes score when player hits
+    ### Computes score when player hits
     def hit(self, card):
         deckDic = DeckOfCards.Deck.deckDic
         if card[0][1] == 'ACE':
@@ -103,18 +108,3 @@ class Player():
             return True
 
         return False
-
-# player = Player(100,"Vick")
-# deck = DeckOfCards.Deck()
-# deck.shuffleDeck()
-# someCards = deck.dealCards(initial_deal=True)
-# print(someCards)
-# anotherCard = deck.dealCards(hit = True)
-# print(anotherCard)
-#
-# print(player.initialDealingScore(someCards))
-# print(player.hit(anotherCard))
-# print(len(deck.deck))
-#
-# print(someCards in deck.deck)
-# print(anotherCard in deck.deck)

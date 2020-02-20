@@ -1,25 +1,31 @@
 ############## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ########################################################
+###### Model of the computer dealer and main game logic
+
 ####Imports
 import random
 import DeckOfCards
 import Player
 
-##Dealing with the computer dealer
+##Computer Dealer Logic
 ########################################################################################################################
-def printComputerDeal(computer_deal):
-    print("Dealing House cards... ")
-    print("Dealer Up Card: ")
-    randCard = random.randint(0,1)
-    show_card = computer_deal[randCard]
+def printComputerDeal(computer_deal, initial_deal = False):
+    if initial_deal:
+        print("Dealing House cards... ")
+        print("Dealer Up Card: ")
+        randCard = random.randint(0,1)
+        show_card = computer_deal[randCard]
 
-    if randCard == 0:
-        print(str([show_card,"*****"]) +  "\n")
+        if randCard == 0:
+            print(str([show_card,"*****"]) +  "\n")
+        else:
+            print(str(["*****", show_card]) + "\n")
     else:
-        print(str(["*****", show_card]) + "\n")
+        print("House Cards: ")
+        print(computer_deal)
 
-##Main Game
-########################################################################################################################
+##############################################   Main Game   ###########################################################
 game_on = True
+twenty_one = 21
 print("Welcome to a text-based simplified BlackJack Game! ")
 print("Coded by Vick @2020" + "\n")
 print("GAME ON!!!")
@@ -35,11 +41,11 @@ while game_on:
     deck.shuffleDeck()
     print("Deck shuffled !" + "\n")
 
-    ###Initial deal
+    ###Initial deal# player = Player(100,"Vick")
     player_initial_deal = deck.dealCards(initial_deal= True)
     computer_initial_deal = deck.dealCards(initial_deal=True)
 
-    #Compute score
+    #Compute initial player score
     player.initialDealingScore(player_initial_deal)
 
     #Print to the console
@@ -51,15 +57,21 @@ while game_on:
     player_turn = True
     current_player_hand = player_initial_deal
 
-    while player_turn:  ###Need to add busting logic !
+    while player_turn:
         hit = player.hitOrStay()
 
         if hit:
             print("Hit! Card received...")
-            card = deck.dealCards(hit = hit)
-            player.hit(card)
+            card = deck.dealCards(hit=hit)
             current_player_hand.append(card)
+            player.hit(card)
             player.printPlayerHand(current_player_hand)
+
+            if player.score > twenty_one:
+                print("Player bust! The house wins!")
+                printComputerDeal(computer_initial_deal, initial_deal=False)
+                player_turn = False
+
         else:
             player.printPlayerHand(current_player_hand)
             player_turn = False
