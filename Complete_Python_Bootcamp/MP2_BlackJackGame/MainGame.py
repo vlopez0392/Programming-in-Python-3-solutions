@@ -2,26 +2,9 @@
 ###### Model of the computer dealer and main game logic
 
 ####Imports
-import random
 import DeckOfCards
 import Player
-
-##Computer Dealer Logic
-########################################################################################################################
-def printComputerDeal(computer_deal, initial_deal = False):
-    if initial_deal:
-        print("Dealing House cards... ")
-        print("Dealer Up Card: ")
-        randCard = random.randint(0,1)
-        show_card = computer_deal[randCard]
-
-        if randCard == 0:
-            print(str([show_card,"*****"]) +  "\n")
-        else:
-            print(str(["*****", show_card]) + "\n")
-    else:
-        print("House Cards: ")
-        print(computer_deal)
+import ComputerDealer
 
 ##############################################   Main Game   ###########################################################
 game_on = True
@@ -32,6 +15,7 @@ print("GAME ON!!!")
 
 while game_on:
     ###Start game
+    computer_dealer = ComputerDealer.ComputerDealer()
     player = Player.Player(1000, "Vick")
     player.displayPlayerInfo()
     player.placeBet()
@@ -39,20 +23,21 @@ while game_on:
     print("Shuffling the deck ...")
     deck = DeckOfCards.Deck()
     deck.shuffleDeck()
-    print("Deck shuffled !" + "\n")
+    print("Deck shuffled !")
 
     ###Initial deal# player = Player(100,"Vick")
     player_initial_deal = deck.dealCards(initial_deal= True)
     computer_initial_deal = deck.dealCards(initial_deal=True)
 
-    #Compute initial player score
+    #Compute initial player and computer score
     player.initialDealingScore(player_initial_deal)
+    computer_dealer.computeScore(computer_initial_deal, initial_deal=True)
 
     #Print to the console
     player.printInitialDeal(player_initial_deal)
-    printComputerDeal(computer_initial_deal)
+    computer_dealer.printComputerDeal(computer_initial_deal, initial_deal=True)
 
-    ###Players turn
+    ########################################## Players turn#############################################################
     print("Player's turn! ")
     player_turn = True
     current_player_hand = player_initial_deal
@@ -69,16 +54,18 @@ while game_on:
 
             if player.score > twenty_one:
                 print("Player bust! The house wins!")
-                printComputerDeal(computer_initial_deal, initial_deal=False)
+                computer_dealer.printComputerDeal(computer_initial_deal, initial_deal=False)
                 player_turn = False
 
         else:
+            print("You have decided to stay! It's now the house's turn! ")
             player.printPlayerHand(current_player_hand)
             player_turn = False
 
     ###Dealer's Turn
     computer_turn = True
     while computer_turn:
+
         computer_turn = False
 
     game_on = False
