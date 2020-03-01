@@ -1,5 +1,5 @@
-############## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ########################################################
-##### Model of a computer dealer and it's logic
+########################## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ############################################
+###### Model of a computer dealer and it's logic
 import random
 import DeckOfCards
 
@@ -27,6 +27,9 @@ class ComputerDealer:
             print("House Cards: ")
             print(computer_deal)
             print("House Score: " + str(self.computer_score) + "\n")
+
+    def reset_computer_score(self):
+        self.computer_score = 0
 
     def computeScore(self,cards, initial_deal = False):
         if initial_deal == True:

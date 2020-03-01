@@ -1,4 +1,4 @@
-############## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ########################################################
+########################## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ############################################
 ###### Model of the computer dealer and main game logic
 
 ####Imports
@@ -13,17 +13,38 @@ print("Welcome to a text-based simplified BlackJack Game! ")
 print("Coded by Vick @2020" + "\n")
 print("GAME ON!!!")
 
+def play_again():
+    deciding = True
+    while deciding:
+        try:
+            decision = input("Play again? Enter Y/N: ")
+            if decision.lower() in ("y", "yes"):
+                print("\n")
+                return True
+            elif decision.lower() in ("n", "no"):
+                return False
+        except ValueError:
+            print("Invalid decision, try again by typing yes, no, y or n")
+
+
+###Start game
+computer_dealer = ComputerDealer.ComputerDealer()
+player = Player.Player(1000, "Vick")
+first_game = True
+
 while game_on:
-    ###Start game
-    computer_dealer = ComputerDealer.ComputerDealer()
-    player = Player.Player(1000, "Vick")
     player.displayPlayerInfo()
-    player.placeBet()
+    this_bet = player.placeBet()
+
+    if not first_game:
+        player.reset_player_score()
+        computer_dealer.reset_computer_score()
 
     print("Shuffling the deck ...")
     deck = DeckOfCards.Deck()
     deck.shuffleDeck()
     print("Deck shuffled !")
+    print("Dealing cards !" + "\n")
 
     ###Initial deal# player = Player(100,"Vick")
     player_initial_deal = deck.dealCards(initial_deal= True)
@@ -37,9 +58,10 @@ while game_on:
     player.printInitialDeal(player_initial_deal)
     computer_dealer.printComputerDeal(computer_initial_deal, initial_deal=True)
 
-    ########################################## Players turn#############################################################
+    ########################################## Player's turn############################################################
     print("Player's turn! ")
     player_turn = True
+    player_bust = False
     current_player_hand = player_initial_deal
 
     while player_turn:
@@ -54,18 +76,36 @@ while game_on:
 
             if player.score > twenty_one:
                 print("Player bust! The house wins!")
+                player.lostBet(betAmount=this_bet)
                 computer_dealer.printComputerDeal(computer_initial_deal, initial_deal=False)
+                player_bust = True
                 player_turn = False
 
         else:
             print("You have decided to stay! It's now the house's turn! ")
+            print("Player's Hand: ")
             player.printPlayerHand(current_player_hand)
             player_turn = False
 
-    ###Dealer's Turn
+    if player_bust:
+        if player.bankRoll <= 0:
+            print("Bankroll reached 0! Get some more money please!")
+            break
+        else:
+            keepPlaying = play_again()
+            if keepPlaying:
+                first_game = False
+                continue
+            else:
+                print("GAME OVER !")
+                break
+
+    ########################################## Dealer's turn############################################################
     computer_turn = True
     while computer_turn:
-
+        print("Revealing the house Cards... ")
+        computer_dealer.printComputerDeal(computer_initial_deal, initial_deal=False)
         computer_turn = False
 
     game_on = False
+

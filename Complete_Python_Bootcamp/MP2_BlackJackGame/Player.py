@@ -1,5 +1,5 @@
-############## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ########################################################
-##### Model of a BJ Player and player-logic
+########################## SECTION 12  MILESTONE PROJECT 2 - BLACKJACK GAME ############################################
+###### Model of a BJ Player and player-logic
 import DeckOfCards
 
 class Player():
@@ -19,18 +19,22 @@ class Player():
 
                 while waitingValidBet:
                     if betAmount <= self.bankRoll and betAmount !=0:
-                        print("A bet has been placed by " + str(self.playerName) + " -- Amount in $: " + str(betAmount))
+                        if betAmount == self.bankRoll:
+                            print(self.playerName + " goes ALL IN!")
+
+                        print("A bet has been placed by " + str(self.playerName) + " -- Amount in $: " + str(betAmount)
+                              + "\n")
                         waitingValidBet = False
+                        placingBet = False
                     else:
                         if betAmount == 0:
-                            print("You can't bet $0! ")
-                            break
-                        print("Your bankroll is insufficient! Please place a valid bet. " + "Your bankroll: "
-                              + str(self.bankRoll))
-                        betAmount = int(input("Please enter the amount to bet: "))
-                placingBet = False
+                            print("You can't bet $0!, Please try again! ")
+                        else:
+                            print("Your bankroll is insufficient! Please place a valid bet. " + "Your bankroll: "
+                                  + str(self.bankRoll))
+                        break
             except ValueError:
-                print("That is an invalid bet! Please input an amount in $!")
+                print("That is an invalid bet! Please input an amount in $!" + "\n")
 
         return betAmount
 
@@ -61,6 +65,10 @@ class Player():
             self.score = self.score + cardValue
             return self.score
 
+    ### Reset player-score
+    def reset_player_score(self):
+        self.score = 0
+
     ### Decision function for ACE value while having a soft hand(Asks for user input)
     ### Hard hands make the ACE value automatically a 1.
     def choose_ace_value(self):
@@ -81,7 +89,6 @@ class Player():
                 print("Invalid option! Please try again!")
 
     def printInitialDeal(self, player_deal):
-        print("Dealing cards!")
         print("Player goes first...  ")
         print("Player Cards: ")
         print(player_deal)
@@ -103,8 +110,10 @@ class Player():
                 print("I didn't get that... Speak more clearly !")
                 continue
             deciding = False
-
         if decision == 'hit':
             return True
 
         return False
+
+    def lostBet(self, betAmount):
+            self.bankRoll = self.bankRoll - betAmount
