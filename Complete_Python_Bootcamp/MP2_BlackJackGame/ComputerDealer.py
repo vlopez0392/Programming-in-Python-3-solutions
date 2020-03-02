@@ -4,7 +4,7 @@ import random
 import DeckOfCards
 
 class ComputerDealer:
-    def __init__(self, computer_score = 0):
+    def __init__(self, computer_score=0):
         self.computer_score = computer_score
         self.deckDic = DeckOfCards.Deck.deckDic
 
@@ -28,8 +28,13 @@ class ComputerDealer:
             print(computer_deal)
             print("House Score: " + str(self.computer_score) + "\n")
 
-    def reset_computer_score(self):
-        self.computer_score = 0
+    def addCard(self, card):
+        if card[0][1] == 'ACE':
+            return self.computer_score
+        else:
+            cardValue = self.deckDic[card[0][1]]
+            self.computer_score = self.computer_score + cardValue
+            return self.computer_score
 
     def computeScore(self,cards, initial_deal = False):
         if initial_deal == True:
@@ -40,3 +45,5 @@ class ComputerDealer:
         else: ##Computer dealer "hits"
             self.computer_score = self.computer_score + self.deckDic[cards[0][1]]
 
+    def reset_computer_score(self):
+        self.computer_score = 0

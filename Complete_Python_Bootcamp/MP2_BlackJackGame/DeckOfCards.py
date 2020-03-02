@@ -3,12 +3,10 @@
 import random
 
 class Deck:
-    ### Class object attributes
     suits = ('HEARTS', 'CLUBS', 'DIAMONDS', 'SPADES')
     deckDic = {"ONE": 1, "TWO": 2, "THREE": 3, "FOUR": 4, "FIVE": 5, "SIX": 6, "SEVEN": 7, "EIGHT": 8, "NINE": 9,
                "JACK": 10, "QUEEN": 10, "KING": 10, "ACE": (1, 11)}
 
-    ### Object constructor
     def __init__(self):
         self.deck = []
         for suit in Deck.suits:
@@ -16,7 +14,6 @@ class Deck:
                 self.deck.append((suit, key))
         assert (len(self.deck) == 52)
 
-    ### Class Methods
     def shuffleDeck(self):
         self.deck = random.sample(self.deck, len(self.deck))
 

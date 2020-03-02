@@ -2,7 +2,7 @@
 ###### Model of a BJ Player and player-logic
 import DeckOfCards
 
-class Player():
+class Player:
     def __init__(self, bankRoll, playerName):
         self.bankRoll = bankRoll
         self.playerName = playerName
@@ -116,4 +116,9 @@ class Player():
         return False
 
     def lostBet(self, betAmount):
-            self.bankRoll = self.bankRoll - betAmount
+        self.bankRoll = self.bankRoll - betAmount
+
+    def wonBet(self, betAmount):
+        self.bankRoll = self.bankRoll + betAmount
+
+

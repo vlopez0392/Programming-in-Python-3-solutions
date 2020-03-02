@@ -9,6 +9,7 @@ import ComputerDealer
 ##############################################   Main Game   ###########################################################
 game_on = True
 twenty_one = 21
+seventeen = 17
 print("Welcome to a text-based simplified BlackJack Game! ")
 print("Coded by Vick @2020" + "\n")
 print("GAME ON!!!")
@@ -26,8 +27,16 @@ def play_again():
         except ValueError:
             print("Invalid decision, try again by typing yes, no, y or n")
 
+def compare_scores(player_score, dealer_score):
+    if player_score > dealer_score:
+        return 1
+    elif dealer_score > player_score:
+        return 0
+    else:
+        return -1
 
-###Start game
+
+# ##Start game
 computer_dealer = ComputerDealer.ComputerDealer()
 player = Player.Player(1000, "Vick")
 first_game = True
@@ -105,7 +114,43 @@ while game_on:
     while computer_turn:
         print("Revealing the house Cards... ")
         computer_dealer.printComputerDeal(computer_initial_deal, initial_deal=False)
+        computer_hand = computer_initial_deal
+
+        if computer_dealer.computer_score < seventeen:
+            print("Adding cards!")
+            while computer_dealer.computer_score < seventeen:
+                add_card = deck.dealCards(hit=True)
+                computer_dealer.addCard(add_card)
+                computer_hand.append(add_card)
+                computer_dealer.printComputerDeal(computer_hand, initial_deal=False)
+
+            if computer_dealer.computer_score > twenty_one:  # House bust
+                print("House bust! " + player.playerName + " wins!")
+                player.wonBet(betAmount=this_bet)
+                break
+
+        # Compare the player's and dealer's hand's
+        result = compare_scores(player.score, computer_dealer.computer_score)
+        if result == 1:
+            print(player.playerName + " wins!")
+            player.wonBet(betAmount=this_bet)
+        elif result == 0:
+            print("The house wins! " + player.playerName + " loses his bet!")
+            player.lostBet(betAmount=this_bet)
+        else:
+            print("It's a push! Please try again!")
+
         computer_turn = False
 
-    game_on = False
+    if player.bankRoll <= 0:
+        print("Bankroll reached 0! Get some more money please!")
+        game_on = False
+    else:
+        keepPlaying = play_again()
+        if keepPlaying:
+            first_game = False
+            game_on = True
+        else:
+            game_on = False
+
 
