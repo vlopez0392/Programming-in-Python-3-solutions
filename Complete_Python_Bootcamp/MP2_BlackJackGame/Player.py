@@ -3,7 +3,6 @@
 import DeckOfCards
 
 class Player:
-
     def __init__(self, bankRoll, playerName):
         self.bankRoll = bankRoll
         self.playerName = playerName
