@@ -59,12 +59,12 @@ while game_on:
     player_initial_deal = deck.dealCards(initial_deal= True)
     computer_initial_deal = deck.dealCards(initial_deal=True)
 
-    #Compute initial player and computer score
-    player.initialDealingScore(player_initial_deal)
-    computer_dealer.computeScore(computer_initial_deal, initial_deal=True)
-
-    #Print to the console
+    #Compute initial player score and print the hand
     player.printInitialDeal(player_initial_deal)
+    player.initialDealingScore(player_initial_deal)
+
+    #Compute dealer score and print up-card value
+    computer_dealer.computeScore(computer_initial_deal, initial_deal=True)
     computer_dealer.printComputerDeal(computer_initial_deal, initial_deal=True)
 
     ########################################## Player's turn############################################################
@@ -144,6 +144,7 @@ while game_on:
 
     if player.bankRoll <= 0:
         print("Bankroll reached 0! Get some more money please!")
+        print("GAME OVER!")
         game_on = False
     else:
         keepPlaying = play_again()
@@ -152,5 +153,3 @@ while game_on:
             game_on = True
         else:
             game_on = False
-
-

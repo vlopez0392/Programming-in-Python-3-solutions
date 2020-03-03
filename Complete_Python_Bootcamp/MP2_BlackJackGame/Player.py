@@ -3,6 +3,7 @@
 import DeckOfCards
 
 class Player:
+
     def __init__(self, bankRoll, playerName):
         self.bankRoll = bankRoll
         self.playerName = playerName
@@ -53,13 +54,21 @@ class Player:
         for card in cards:
              if card[1] != 'ACE':
                 self.score = self.score + deckDic[card[1]]
+             else:
+                 ace_value = self.choose_ace_value()
+                 self.score = self.score + ace_value
+        print("Score: " + str(self.score) + "\n")
         return self.score
 
     ### Computes score when player hits
     def hit(self, card):
         deckDic = DeckOfCards.Deck.deckDic
         if card[0][1] == 'ACE':
-            return self.score
+            if self.score < 10:
+                ace_value = self.choose_ace_value()
+                return self.score + ace_value
+            else:
+                return self.score + 1
         else:
             cardValue = deckDic[card[0][1]]
             self.score = self.score + cardValue
@@ -73,26 +82,28 @@ class Player:
     ### Hard hands make the ACE value automatically a 1.
     def choose_ace_value(self):
         choosingValue = True
-        while choosingValue:
-            try:
-                print("You have been dealt an ACE! ")
-                decision = int(input("Please input the desired value (1 or 11): "))
-                if decision not in (1,11):
-                    print("That is not a valid decision, please try again! ")
-                else:
-                    if decision == 1:
-                        print("You have chosen to make your ACE a 1")
-                        return 1
-                    print("You have chosen to make your ACE an 11")
-                    return 11
-            except ValueError:
-                print("Invalid option! Please try again!")
+        if self.score < 10:
+            while choosingValue:
+                try:
+                    print("You have been dealt an ACE! ")
+                    decision = int(input("Please input the desired value (1 or 11): "))
+                    if decision not in (1,11):
+                        print("That is not a valid decision, please try again! ")
+                    else:
+                        if decision == 1:
+                            print("You have chosen to make your ACE a 1")
+                            return 1
+                        print("You have chosen to make your ACE an 11")
+                        return 11
+                except ValueError:
+                    print("Invalid option! Please try again!")
+        else:
+            return 1
 
     def printInitialDeal(self, player_deal):
         print("Player goes first...  ")
         print("Player Cards: ")
         print(player_deal)
-        print("Score: " + str(self.score) + "\n")
 
     def printPlayerHand(self, hand):
         print(hand)
