@@ -18,7 +18,7 @@ class Player:
                 waitingValidBet = True
 
                 while waitingValidBet:
-                    if betAmount <= self.bankRoll and betAmount !=0:
+                    if betAmount <= self.bankRoll and not(betAmount <= 0) :
                         if betAmount == self.bankRoll:
                             print(self.playerName + " goes ALL IN!")
 
@@ -27,8 +27,8 @@ class Player:
                         waitingValidBet = False
                         placingBet = False
                     else:
-                        if betAmount == 0:
-                            print("You can't bet $0!, Please try again! ")
+                        if betAmount <= 0:
+                            print("You can't bet $0 or less than $0!, Please try again! ")
                         else:
                             print("Your bankroll is insufficient! Please place a valid bet. " + "Your bankroll: "
                                   + str(self.bankRoll))
