@@ -35,7 +35,7 @@ def return_squares():
     while True:
         try:
             num = int(input("Please enter the integer to be squared: "))
-        except:
+        except TypeError:
             print("Sorry, that is not an integer, try again")
             continue
         else:

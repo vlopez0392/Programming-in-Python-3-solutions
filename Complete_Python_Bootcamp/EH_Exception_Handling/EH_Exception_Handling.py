@@ -20,7 +20,7 @@ print(add(num1,10))
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ## Instead we use a try-except block. Even if there is an error, execution of the script is NOT halted.
-## Consider the follwing example:
+## Consider the following example:
 try:
     ##Attempt this code, however it may have an error
     result = 10 + 10

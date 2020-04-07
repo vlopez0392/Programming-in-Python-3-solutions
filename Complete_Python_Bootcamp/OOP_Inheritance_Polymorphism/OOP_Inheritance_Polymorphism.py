@@ -101,7 +101,7 @@ def pet_speak(pet): ## The parameter pet does not know the type of object it wil
 pet_speak(felix)
 pet_speak(niko)
 
-#### Testing polymorphism (Example IV)-> Using abstract classed -> Classes that never expect to be instantiated.
+#### Testing polymorphism (Example IV)-> Using abstract classes -> Classes that never expect to be instantiated.
 ##                                                              -> They are expected to be base classes.
 ## Consider the example:
 
