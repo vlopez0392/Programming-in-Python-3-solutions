@@ -69,12 +69,12 @@ print(next(g)) ##Internally, the generator object has the behavior as that of th
 print(next(g))
 print(next(g))
 
-##print(g) raises a StopIteration Error -> All of the values have been yielded
+##print(next(g)) raises a StopIteration Error -> All of the values have been yielded
                                     ##  -> The for-loop catches this and stops iterating when next returns None
 
 print("################################# \n")
 
-##### Using the iter() function -> Converts an iterabel object into an iterator
+##### Using the iter() function -> Converts an iterable object into an iterator
 
 s = 'hello'
 ## We cannot call next() on s -> s is NOT an iterator but a String object
