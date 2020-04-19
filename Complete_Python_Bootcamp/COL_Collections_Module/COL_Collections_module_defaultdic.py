@@ -15,7 +15,6 @@ reg_dic = {'k1':1}
 
 print(reg_dic['k1'])
 # reg_dic['a'] ##raises a KeyError
-
 # A defaultdict
 
 d = defaultdict(object) ##object is the default factory  // No keys in this dict
