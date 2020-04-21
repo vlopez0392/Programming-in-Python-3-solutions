@@ -21,7 +21,6 @@ print(d)
 for k,v in d.items():
     print(k,v)
 
-
 ### Consider the OrderedDict
 d = OrderedDict()
 d['a'] = 1
@@ -35,7 +34,6 @@ print(d)
 
 for k,v in d.items():
     print(k,v)
-
 
 ### Testing equality in an OrderedDict
 ### In a regular dictionary order of addition is not relevant

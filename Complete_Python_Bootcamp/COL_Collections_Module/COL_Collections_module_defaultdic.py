@@ -7,7 +7,7 @@ from collections import defaultdict
 #### (default_factory) as default data type for the dictionary. Using defaultdic is faster than using dict.set_default
 ####  method.
 
-#### A defaultdic will never raise a KeyError. Any key that does not exist gets the value returned by the default
+#### A defaultdict will never raise a KeyError. Any key that does not exist gets the value returned by the default
 #### factory.
 
 ## A regular dictionary
