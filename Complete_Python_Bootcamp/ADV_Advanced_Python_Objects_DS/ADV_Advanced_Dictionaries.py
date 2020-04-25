@@ -9,7 +9,7 @@ print(d1)
 d2 = {x:x**2 for x in range(10)} ##Key will be x and value will be x**2
 print(d2)
 
-#### What if we wan't to assign keys not based on the values ?
+#### What if we don't want to assign keys based on the values ?
 d3 = {k:v**2 for k,v in zip(['a','b'],range(2,4))}
 print(d3)
 
